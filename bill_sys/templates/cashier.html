@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+        .items {
+            display: flex;
+            flex-direction: row;
+            gap: 5rem;
+        }
+
+        .food {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin-top: 10px;
+        }
+
+        .food input {
+            position: absolute;
+            left: 270px;
+            width: 60px;
+        }
+
+        .drink {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin-top: 10px;
+        }
+
+        .drinks {
+            position: absolute;
+            left: 360px;
+        }
+
+        .icecream {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin-top: 10px;
+        }
+
+        .drink input {
+            position: absolute;
+            left: 150px;
+            width: 60px;
+        }
+
+        .icecreams {
+            position: absolute;
+            left: 610px;
+        }
+
+        .icecream input {
+            position: absolute;
+            left: 200px;
+            width: 60px;
+        }
+
+        .items {
+            background-color: rgba(250, 128, 114, 0.5);
+            width: 780px;
+            border: solid 1px rgba(250, 128, 114);
+            border-radius: 5px;
+        }
+
+        .items {
+            padding: 20px;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .dis,
+        .total {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .cal {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            background-color: rgba(255, 228, 196, 0.5);
+            padding: 20px;
+            width: 780px;
+            border: solid 1px bisque;
+            border-radius: 5px;
+            margin-bottom: 50px;
+        }
+
+        .billing {
+            background-color: rgb(169, 167, 167);
+            border: solid 1px rgb(77, 76, 76);
+            border-radius: 5px;
+            width: 400px;
+            position: absolute;
+            left: 950px;
+            top: 115px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bill {
+            background-color: white;
+            color: black;
+            width: max-content;
+            border: solid 1px black;
+        }
+
+        .bill code {
+            color: black;
+        }
+
+        .bill code table {
+            margin-left: 5px;
+        }
+
+        .bill code table th {
+            padding-left: 28px;
+            padding-right: 20px;
+        }
+
+        .bill code table td {
+            padding-left: 28px;
+            padding-right: 20px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .bill {
+                margin-right: 300%;
+            }
+
+            code,
+            code * {
+                visibility: visible;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-3 alert alert-primary">RESTAURANT BILLING SYSTEM</h1>
+        <form action="/" method="post">
+            {% csrf_token %}
+            <div class="items">
+                <div class="foods">
+                    <h3 class="text-center">FOODS</h3>
+                    <div class="food">
+                        <h4>Rice</h4>
+                        <input type="number" class="rice" name="rice" id="rice" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Fish</h4>
+                        <input type="number" class="fich" name="fish" id="fish" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Panner</h4>
+                        <input type="number" class="panner" name="panner" id="panner" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Chicken</h4>
+                        <input type="number" class="chicken" name="chicken" id="chicken" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Biriyani</h4>
+                        <input type="number" class="biriyani" name="biriyani" id="biriyani" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Mix Veg</h4>
+                        <input type="number" class="mixveg" name="mixveg" id="mixveg" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Omlet</h4>
+                        <input type="number" class="omlet" name="omlet" id="omlet" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Rooti</h4>
+                        <input type="number" class="rooti" name="rooti" id="rooti" placeholder="0" value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Alu Paratha</h4>
+                        <input type="number" class="aluparatha" name="aluparatha" id="aluparatha" placeholder="0"
+                            value="0">
+                    </div>
+                    <div class="food">
+                        <h4>Chowmin</h4>
+                        <input type="number" class="chowmin" name="chowmin" id="chowmin" placeholder="0" value="0">
+                    </div>
+                </div>
+                <div class="drinks">
+                    <h3 class="text-center">DRINKS</h3>
+                    <div class="drink">
+                        <h4>Lassi</h4>
+                        <input type="number" class="lassi" name="lassi" id="lassi" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Tea</h4>
+                        <input type="number" class="tea" name="tea" id="tea" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Coffee</h4>
+                        <input type="number" class="coffee" name="coffee" id="coffee" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Lemon Tea</h4>
+                        <input type="number" class="lemontea" name="lemontea" id="lemontea" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Faluda</h4>
+                        <input type="number" class="faluda" name="faluda" id="faluda" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Sprite</h4>
+                        <input type="number" class="sprite" name="sprite" id="sprite" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Coca-Cola</h4>
+                        <input type="number" class="cocacola" name="cocacola" id="cocacola" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>SevenUp</h4>
+                        <input type="number" class="sevenup" name="sevenup" id="sevenup" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Milk</h4>
+                        <input type="number" class="milk" name="milk" id="milk" placeholder="0" value="0">
+                    </div>
+                    <div class="drink">
+                        <h4>Mango Juice</h4>
+                        <input type="number" class="mangojuice" name="mangojuice" id="mangojuice" placeholder="0"
+                            value="0">
+                    </div>
+                </div>
+                <div class="icecreams">
+                    <h3 class="text-center">ICECREAMS</h3>
+                    <div class="icecream">
+                        <h4>Chocobar</h4>
+                        <input type="number" class="chocober" name="chocober" id="chocober" placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Snow Cream</h4>
+                        <input type="number" class="snowcream" name="snowcream" id="snowcream" placeholder="0"
+                            value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Rolled IceCream</h4>
+                        <input type="number" class="rolledicecream" name="rolledicecream" id="rolledicecream"
+                            placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Soft Serve</h4>
+                        <input type="number" class="softserve" name="softserve" id="softserve" placeholder="0"
+                            value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Frozen Yogurt</h4>
+                        <input type="number" class="frozenyogurt" name="frozenyogurt" id="frozenyogurt" placeholder="0"
+                            value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Venilla</h4>
+                        <input type="number" class="venilla" name="venilla" id="venilla" placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Sordet</h4>
+                        <input type="number" class="sordet" name="sordet" id="sordet" placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Sherbet</h4>
+                        <input type="number" class="sherbet" name="sherbet" id="sherbet" placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Gelato</h4>
+                        <input type="number" class="gelato" name="gelato" id="gelato" placeholder="0" value="0">
+                    </div>
+                    <div class="icecream">
+                        <h4>Kulfi</h4>
+                        <input type="number" class="kulfi" name="kulfi" id="kulfi" placeholder="0" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="cal mt-3">
+                <div class="dis">
+                    <h4>Discount</h4>
+                    <input type="number" name="discount" id="discount" placeholder="0" value="0">
+                </div>
+                <div class="total">
+                    <h4>Total</h4>
+                    <input type="number" name="total" id="total" placeholder="0" value={{total}}>
+                </div>
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary">Calculate</button>
+                </div>
+            </div>
+        </form>
+        <div class="billing">
+            <h3 class="text-center">Bill</h3>
+            <div class="bill" id="bill">
+                <code>
+                    ----------------Welcome----------------
+                <br>
+                    <p class="text-center">Company Name
+                    <br>
+                    Address1
+                    <br>
+                    Address2
+                    <br>
+                    Contact Details
+                </p>    
+                <table>
+                    <th>Items</th>
+                    <th>Qty</th>
+                    <th>Prices</th>
+                    {% for arr in finalArr %}
+                    <tr>
+                        {% for a in arr %}<td>{{a}}</td>{% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                ---------------------------------------
+                <p>Subtotal: {{subTotal}}/-</p>
+                <p>Discount: {{dis}}%</p>
+                <p>Total: {{total}}/- </p>
+                ---------------------------------------
+                <p>THANK YOU SO MUCH FOR HAVING LUNCH HERE</p>
+                <p class="text-center">HOPE YOU WILL COME AGAIN</p>
+                </code>
+            </div>
+            <div class="button">
+                <button type="button" class="btn btn-primary mt-3 mb-3" id="print">Print</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+        </script>
+    <script>
+        var printButton = document.getElementById("print");
+        printButton.addEventListener('click', function () {
+            print();
+        })
+    </script>
+</body>
+
+</html>

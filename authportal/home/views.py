@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 import smtplib
 from random import randint
 import time
+arr = []
 # Create your views here.
 def loguser(request):
     if request.method == "POST":
@@ -31,8 +32,15 @@ def SignIn(request):
         firstname = request.POST.get("firstname")
         lastname = request.POST.get("lastname")
         email = request.POST.get("email")
-        arr = [username,password,firstname,lastname,email]
-        return arr
+        OTP = str(emailAuth(email=email))
+        print("Generated OTP:",OTP)
+        arr.append(username)
+        arr.append(password)
+        arr.append(firstname)
+        arr.append(lastname)
+        arr.append(email)
+        arr.append(OTP)
+        return redirect("/verify")
     return render(request,'signin.html')
 
 def emailAuth(email):
@@ -60,14 +68,15 @@ def emailAuth(email):
 
 def verify(request):
     if request.method == "POST":
-        arr = SignIn(request)
         username = arr[0]
         password = arr[1]
         firstname = arr[2]
         lastname = arr[3]
         email = arr[4]
+        OTP = arr[5]
         otp = request.POST.get("otp")
-        OTP = str(emailAuth(email=email))
+        print("Data received from verify page:",otp)
+        print("OTP generated:",OTP)
         time.sleep(1)
         if otp == OTP:
             user = User.objects.create_user(username, email, password)
@@ -78,4 +87,5 @@ def verify(request):
             if USER is not None:
                 login(request, USER)
                 return redirect('/')
+        return redirect("/")
     return render(request, 'verify.html')

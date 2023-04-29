@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} | Create{% endblock title %}
+
+{% block body %}
+
+<div class="container d-flex justify-content-center mt-lg-5">
+    <div class="main w-75 p-3">
+        <h2 class="text-center mb-lg-5">Add Question</h2>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Questions</th>
+                <th scope="col">Op(a)</th>
+                <th scope="col">Op(b)</th>
+                <th scope="col">Op(c)</th>
+                <th scope="col">Op(d)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in obj %}
+              <tr>
+                <th scope="row">{{i.qn}}</th>
+                <td>{{i.Op_a}}</td>
+                <td>{{i.Op_b}}</td>
+                <td>{{i.Op_c}}</td>
+                <td>{{i.Op_d}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        <!-- Button trigger modal -->
+        <div class="position-absolute start-50 translate-middle mt-4">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add
+    </button>
+    <a href="/view">
+      <button type="button" class="btn btn-secondary">
+        Create Quiz
+    </button>
+    </a>
+        </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Question</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/addQuiz/" method="post">
+           {% csrf_token %}
+           <input class="form-control border-3 border-success-subtle rounded mb-2" type="text"  name="no" id="no" placeholder="Qn No">
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text" name="qn" id="qn" placeholder="Enter your question here...">
+            <label for="qns" class="form-label">Op(a):</label>
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text"  name="op_a" id="op_a" placeholder="Option (a)">
+            <label for="qns" class="form-label">Op(b):</label>
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text"  name="op_b" id="op_b" placeholder="Option (b)">
+            <label for="qns" class="form-label">Op(c):</label>
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text"  name="op_c" id="op_c" placeholder="Option (c)">
+            <label for="qns" class="form-label">Op(d):</label>
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text"  name="op_d" id="op_d" placeholder="Option (d)">
+            <label for="qns" class="form-label">Correct Ans:</label>
+            <input class="form-control border-3 border-success-subtle rounded mb-2" type="text" name="correct" id="correct" placeholder="Correct Answer">
+            <button type="submit" class="btn btn-outline-primary mt-3 rounded">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+
+{% endblock body %}

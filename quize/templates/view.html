@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} | View{% endblock title %} | View
+
+{% block body %}
+<div class="container w-75 mt-5">
+    <div class="card p-5 border-opacity-50 border-3 border-info">
+        {% for i in obj %}
+        <hr>
+        <h4> {{i.qnno}}) {{i.qn}}</h4>
+        <div class="form-check">
+            <input class="ans" type="radio" name="{{i.qnno}}" id="{{i.Op_a}}" value="{{i.Op_a}}">
+            <label class="form-check-label" for="{{i.Op_a}}">
+                {{i.Op_a}}
+            </label>
+        <br>
+        
+            <input class="ans" type="radio" name="{{i.qnno}}" id="{{i.Op_b}}" value="{{i.Op_b}}">
+            <label class="form-check-label" for="{{i.Op_b}}">
+                {{i.Op_b}}
+            </label>
+        <br>
+        
+            <input class="ans" type="radio" name="{{i.qnno}}" id="{{i.Op_c}}" value="{{i.Op_c}}">
+            <label class="form-check-label" for="{{i.Op_c}}">
+                {{i.Op_c}}
+            </label>
+        
+        <br>
+            <input class="ans" type="radio" name="{{i.qnno}}" id="{{i.Op_d}}" value="{{i.Op_d}}">
+            <label class="form-check-label" for="{{i.Op_d}}">
+                {{i.Op_d}}
+            </label>
+            <br>
+            <b class="correctAns" style="color: green; display: none;">{{i.correct}}</b>
+        </div>
+        {% endfor %}
+        <hr>
+        <b class="text-center" id="UserAns" style="color: blue;"></b>
+
+    </div>
+    <div class="button d-flex justify-content-center mt-4 mb-5">
+        <button class="btn btn-primary" type="submit" onclick="Check()">Submit</button>
+    </div>
+</div>
+
+<script>
+    let a = document.getElementsByTagName("input")
+    function Check(){
+        document.getElementById("UserAns").innerHTML = ""; 
+        for (let index = 0; index < a.length; index++) {
+            if (a[index].type == "radio") {
+                if (a[index].checked) {
+                    console.log(a[index].name)
+                    console.log(a[index].value)
+                    document.getElementById("UserAns").innerHTML += "Qn" + a[index].name + ": You Selected: " + a[index].value + "<br>"
+                }
+            }
+        }
+        document.getElementsByTagName('input').setattribute("disabled","disabled")
+        document.getElementsByClassName("correctAns").style
+    }
+    
+</script>
+
+{% endblock body %}
